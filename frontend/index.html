@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LEXORA | Autonomous Judicial Intelligence & Courtroom Platform</title>
+  <meta name="description" content="State-of-the-art algorithmic judicial platform powered by Gemini AI, featuring automated police FIR ingestion, tri-tier case routing, and cinematic courtroom balance meter." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Ambient 60fps Starfield / Neural Canvas -->
+  <canvas id="court-canvas"></canvas>
+  <div class="ambient-glow"></div>
+
+  <div id="app-container">
+
+    <!-- Global Application Header -->
+    <header class="global-header">
+      <div class="brand-wrapper" onclick="navigateToStage(1)">
+        <div class="brand-logo-seal">
+          <img src="lexora_logo.png" alt="Lexora Official Crest" class="brand-logo-img" />
+        </div>
+        <div class="brand-title-wrap">
+          <div class="brand-title">LEXORA</div>
+          <div class="brand-ai-badge">
+            <span class="brand-ai-dot"></span>
+            <span>GOOGLE GEMINI 3.8 FLASH • PURE AI</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="header-status-group">
+        <div class="nav-stage-indicator">
+          <span class="stage-pill active" id="pill-stage-1" onclick="navigateToStage(1)">01 Entry</span>
+          <span class="stage-pill" id="pill-stage-2" onclick="navigateToStage(2)">02 FIR Intake</span>
+          <span class="stage-pill" id="pill-stage-3" onclick="navigateToStage(3)">03 AI Routing</span>
+          <span class="stage-pill" id="pill-stage-4" onclick="navigateToStage(4)">04 Courtroom</span>
+        </div>
+
+        <div class="header-controls">
+          <div class="brand-badge">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"></circle></svg>
+            <span>LIVE AI REASONING</span>
+          </div>
+          <button class="icon-btn active" id="btn-sound-toggle" title="Court Sound Effects Active">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+              <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ===================================================================
+         STAGE 1: CINEMATIC SPLASH SCREEN
+         =================================================================== -->
+    <main class="stage-container splash-stage active" id="stage-splash">
+      <div class="splash-emblem-wrap">
+        <div class="splash-rings"></div>
+        <div class="splash-rings-inner"></div>
+        <div class="splash-emblem">
+          <img src="lexora_logo.png" alt="Lexora Official Seal" class="splash-logo-img" />
+        </div>
+      </div>
+
+      <h1 class="splash-hero-title">LEXORA</h1>
+      <div class="splash-hero-subtitle">AUTONOMOUS JUDICIAL INTELLIGENCE PLATFORM</div>
+      
+      <p class="splash-meta-desc">
+        Pure AI-Driven Jurisprudence & Algorithmic Courtroom powered by Google Gemini 3.8 Flash. 
+        Zero Rule-Based Criteria. Automated FIR Ingestion, Tri-Tier Autonomy Classification, 
+        Dynamic Scales of Justice Balance Meter, and Authoritative Judicial Pronouncements.
+      </p>
+
+      <div class="splash-prompt-box">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="5 3 19 12 5 21 5 3"></polygon>
+        </svg>
+        <span>Press Any Key or Click Anywhere to Enter</span>
+      </div>
+    </main>
+
+    <!-- ===================================================================
+         STAGE 2: POLICE FIR INTAKE DESK
+         =================================================================== -->
+    <section class="stage-container fir-stage" id="stage-fir">
+      <div class="section-hero-banner">
+        <div class="banner-left-wrap">
+          <img src="lexora_logo.png" alt="Lexora Judicial Seal" class="banner-crest-logo" />
+          <div class="section-heading-group">
+            <h2>Official Police FIR e-Filing Portal</h2>
+            <p>National Crime Records Integrated Interface • Digital Judicial Ingestion Desk</p>
+          </div>
+        </div>
+        <div class="station-badge">
+          <span class="police-badge-pulse"></span>
+          <span>DELHI POLICE • CYBER & ECONOMIC OFFENSES WING</span>
+        </div>
+      </div>
+
+      <!-- Quick Preset Scenario Selectors (Clean Wrapping, No Ugly Scrollbar) -->
+      <div class="preset-selector-bar">
+        <div class="preset-title">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+          <span>Select Test Case Scenario (1-Click Presets):</span>
+        </div>
+        <div class="preset-pills-row">
+          <button type="button" class="preset-pill active" data-preset="commercial">
+            <span class="tier-dot green"></span>
+            <span>Commercial Cheque Dishonour (138 NI Act) [Tier 1 AI Candidate]</span>
+          </button>
+          <button type="button" class="preset-pill" data-preset="cyber">
+            <span class="tier-dot amber"></span>
+            <span>Cyber Biometric Extortion (66D IT Act) [Tier 2 Supervised AI]</span>
+          </button>
+          <button type="button" class="preset-pill" data-preset="violent">
+            <span class="tier-dot red"></span>
+            <span>Armed Robbery & Grievous Hurt (309 BNS) [Tier 3 Human Bench]</span>
+          </button>
+          <button type="button" class="preset-pill" data-preset="custom">
+            <span>+ Custom Blank FIR</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Main FIR Form -->
+      <form class="fir-form-card" id="fir-intake-form">
+        
+        <div class="form-section-divider">01 • Jurisdiction & Investigating Officer</div>
+        <div class="form-grid-3">
+          <div class="form-group">
+            <label class="form-label">FIR Reference Number</label>
+            <input type="text" class="form-input" id="fir-number" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Police Station / Jurisdiction</label>
+            <input type="text" class="form-input" id="fir-station" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Investigating Officer (IO)</label>
+            <input type="text" class="form-input" id="fir-io" required />
+          </div>
+        </div>
+
+        <div class="form-section-divider">02 • Parties to the Offense</div>
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label">Complainant / Aggrieved Party</label>
+            <input type="text" class="form-input" id="fir-complainant" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Complainant Contact / ID</label>
+            <input type="text" class="form-input" id="fir-complainant-phone" required />
+          </div>
+        </div>
+
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label">Accused / Suspect Information</label>
+            <input type="text" class="form-input" id="fir-accused" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Accused Last Known Address / Entity ID</label>
+            <input type="text" class="form-input" id="fir-accused-address" required />
+          </div>
+        </div>
+
+        <div class="form-section-divider">03 • Offense Facts & Penal Statutes</div>
+        <div class="form-group" style="margin-bottom: 1.25rem;">
+          <label class="form-label">Statutory Provisions & Penal Sections Invoked</label>
+          <input type="text" class="form-input" id="fir-sections" required />
+        </div>
+
+        <div class="form-group" style="margin-bottom: 1.25rem;">
+          <label class="form-label">Statement of Facts & Detailed Complaint</label>
+          <textarea class="form-textarea" id="fir-complaint" required></textarea>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 1.25rem;">
+          <label class="form-label">Investigating Officer Justification & Prima Facie Findings</label>
+          <textarea class="form-textarea" id="fir-justification" style="min-height: 80px;" required></textarea>
+        </div>
+
+        <div class="form-section-divider">04 • Certified Digital Exhibits & Evidence Vault</div>
+        <!-- Evidence Upload Dropzone -->
+        <label class="form-label" style="margin-bottom: 0.5rem;">Attached Forensic Exhibits (Images, PDFs, Memos)</label>
+        <div class="dropzone-container" id="fir-dropzone">
+          <input type="file" id="fir-file-input" multiple style="display: none;" />
+          <div class="dropzone-content">
+            <div class="dropzone-icon">⚖</div>
+            <div class="dropzone-text">Click or Drag & Drop Certified Evidence Files Here</div>
+            <div class="dropzone-hint">Supports PDF forensic reports, CCTV captures, bank memos, audio transcripts (max 50MB)</div>
+          </div>
+        </div>
+        <div class="attached-files-list" id="attached-files-list"></div>
+
+        <div class="form-actions-row">
+          <button type="button" class="btn-secondary" onclick="clearFIRForm()">Reset Fields</button>
+          <button type="submit" class="btn-primary" id="btn-submit-fir">
+            <span>Execute AI Judicial Routing & Scoring</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <!-- ===================================================================
+         STAGE 3: AI CASE ANALYZER & TRI-TIER ROUTING
+         =================================================================== -->
+    <section class="stage-container analysis-stage" id="stage-analysis">
+      <div class="analysis-hud-card">
+        <div class="hud-top-grid">
+          
+          <!-- Circular Score Dial -->
+          <div class="score-gauge-box">
+            <svg class="gauge-svg" viewBox="0 0 170 170">
+              <defs>
+                <linearGradient id="gaugeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#00d2ff" />
+                  <stop offset="50%" stop-color="#e5b958" />
+                  <stop offset="100%" stop-color="#10b981" />
+                </linearGradient>
+              </defs>
+              <circle class="gauge-track" cx="85" cy="85" r="75"></circle>
+              <circle class="gauge-fill" id="gauge-fill-circle" cx="85" cy="85" r="75"></circle>
+            </svg>
+            <div class="gauge-center-text">
+              <div class="gauge-score-value" id="gauge-score-val">--%</div>
+              <div class="gauge-score-label">AI SUITABILITY</div>
+            </div>
+          </div>
+
+          <div class="hud-details-box">
+            <div class="telemetry-status-pill">
+              <span class="telemetry-dot"></span>
+              <span id="analysis-telemetry-text">Gemini 3.8 Flash Neural Legal Core Active</span>
+            </div>
+            <h3 class="analysis-main-title" id="analysis-case-title">Evaluating Case Jurisdiction & Statutory Viability...</h3>
+            <p class="analysis-summary-text" id="analysis-summary-text">Synthesizing criminal statutes and evidentiary trail...</p>
+            <div class="analysis-meta-chips">
+              <div class="meta-chip" id="chip-domain"><strong>Domain:</strong> Commercial</div>
+              <div class="meta-chip" id="chip-severity"><strong>Severity:</strong> Medium</div>
+              <div class="meta-chip" id="chip-time"><strong>Est. Timeline:</strong> 48 Hours</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- The Three Categories / Tiers Breakdown -->
+        <h4 class="tiers-container-title">
+          <span>Tri-Tier Autonomy Classification (Jurisprudential Routing):</span>
+        </h4>
+
+        <div class="tiers-grid">
+          <!-- Tier 1 -->
+          <div class="tier-card" id="tier-card-1">
+            <div class="tier-active-badge">AI RECOMMENDED</div>
+            <div class="tier-header">
+              <span class="tier-number">CATEGORY 1</span>
+              <span class="tier-suitability-tag" style="color: #10b981; border: 1px solid rgba(16,185,129,0.3);">High AI Fit (&gt;70%)</span>
+            </div>
+            <div class="tier-name">Full AI Autonomy with Post-Verdict Review</div>
+            <p class="tier-desc">
+              AI conducts the trial, parses electronic exhibits, weighs testimonies, and prepares the final verdict. 
+              An authorized human judicial registrar only conducts a final review before seal execution.
+            </p>
+            <ul class="tier-workflow-steps">
+              <li>Autonomous discovery & discovery audit</li>
+              <li>Automated 50-50 probative balance adjustment</li>
+              <li>Full binding decree subject to magistrate countersignature</li>
+            </ul>
+          </div>
+
+          <!-- Tier 2 -->
+          <div class="tier-card" id="tier-card-2">
+            <div class="tier-active-badge" style="display: none;">AI RECOMMENDED</div>
+            <div class="tier-header">
+              <span class="tier-number">CATEGORY 2</span>
+              <span class="tier-suitability-tag" style="color: #f59e0b; border: 1px solid rgba(245,158,11,0.3);">Moderate AI Fit (40-70%)</span>
+            </div>
+            <div class="tier-name">Supervised AI Trial (Step-by-Step Oversight)</div>
+            <p class="tier-desc">
+              AI drives procedural steps and proposes evidentiary rulings, but a presiding human magistrate 
+              must review and validate the AI's reasoning at each procedural milestone.
+            </p>
+            <ul class="tier-workflow-steps">
+              <li>AI proposes orders & flags witness contradictions</li>
+              <li>Human judge validates each meter shift and admissibility</li>
+              <li>Dual-signature joint judicial order</li>
+            </ul>
+          </div>
+
+          <!-- Tier 3 -->
+          <div class="tier-card" id="tier-card-3">
+            <div class="tier-active-badge" style="display: none;">MANDATORY HUMAN BENCH</div>
+            <div class="tier-header">
+              <span class="tier-number">CATEGORY 3</span>
+              <span class="tier-suitability-tag" style="color: #ef4444; border: 1px solid rgba(239,68,68,0.3);">Low AI Fit (&lt;40%)</span>
+            </div>
+            <div class="tier-name">Human-Led Trial with AI Intelligence Co-Pilot</div>
+            <p class="tier-desc">
+              Mandatory for severe violent crimes, grave bodily harm, or constitutional liberties. 
+              A Senior Human Judge conducts all proceedings; AI operates exclusively as courtroom co-pilot.
+            </p>
+            <ul class="tier-workflow-steps">
+              <li>Human magistrate holds plenary jurisdiction</li>
+              <li>AI assists with live steno, precedent retrieval & forensics</li>
+              <li>Sole human judicial adjudication</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Citizen Right of Choice -->
+        <div class="citizen-choice-box">
+          <h4 class="choice-heading">Citizen Right of Election: Choose Adjudication Mode</h4>
+          <p class="choice-sub">The Complainant / Accused holds the constitutional right to elect the bench mode for this matter:</p>
+
+          <div class="choice-cards-row">
+            <div class="choice-card selected" id="choice-card-ai">
+              <div class="choice-card-title">
+                <span>Appoint AI Judge (Fast-Track Digital Court)</span>
+                <span style="color: var(--cyan-primary);">⚡ 48-Hour Resolution</span>
+              </div>
+              <p class="choice-card-desc">
+                Convene the automated Court of Lexora immediately. Zero courtroom backlogs, continuous mathematical 
+                probative balancing, live speech steno, and automated final decree.
+              </p>
+            </div>
+
+            <div class="choice-card" id="choice-card-human">
+              <div class="choice-card-title">
+                <span>Appoint Traditional Human Judge</span>
+                <span style="color: var(--gold-light);">⚖ Human Bench</span>
+              </div>
+              <p class="choice-card-desc">
+                Assign a human magistrate with AI Courtroom Co-Pilot assistance. Formal judicial hearing 
+                scheduled in standard physical sessions docket.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- AI Jurisprudence Reasoning Bullet List -->
+        <div class="ai-reasoning-panel">
+          <div class="reasoning-panel-title">Gemini Legal Engine Jurisprudential Assessment (Pure AI Inference):</div>
+          <ul class="reasoning-list" id="analysis-reasoning-list">
+            <li>Analyzing statutory elements under Bharatiya Nyaya Sanhita and Special Acts...</li>
+          </ul>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 1rem;">
+          <button class="btn-secondary" onclick="navigateToStage(2)">Modify FIR Details</button>
+          <button class="btn-primary" id="btn-convene-court">
+            <span>Convene Courtroom & Proceed to Hearing</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         STAGE 4: THE 3D/CINEMATIC COURTROOM (THE COURT OF LEXORA)
+         =================================================================== -->
+    <section class="stage-container courtroom-stage" id="stage-courtroom">
+      
+      <!-- Top Dynamic Balance Meter (The Scales of Justice) -->
+      <div class="scales-meter-bar">
+        <div class="meter-header-row">
+          <div class="meter-party-label label-prosecution">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            <span>PROSECUTION (COMPLAINANT)</span>
+            <span class="meter-ratio-display" id="meter-pros-val">50%</span>
+          </div>
+
+          <div class="meter-center-badge">
+            <div class="meter-balance-title">SCALES OF JUSTICE • LIVE GUILT & STRENGTH BALANCE</div>
+            <div id="court-case-heading" style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-dim); margin-top: 2px;">Singhania vs Apex Ventures [FIR/2026/10492]</div>
+          </div>
+
+          <div class="meter-party-label label-defense">
+            <span class="meter-ratio-display" id="meter-def-val">50%</span>
+            <span>DEFENSE (ACCUSED)</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s-8-4-8-10V5l8-3 8 3v7c0 6-8 10-8 10z"></path></svg>
+          </div>
+        </div>
+
+        <!-- The Animated Gauge Track & Needle -->
+        <div class="meter-track-wrapper">
+          <div class="meter-fill-prosecution" id="meter-fill-pros"></div>
+          <div class="meter-fill-defense" id="meter-fill-def"></div>
+          <div class="meter-center-marker"></div>
+          <div class="meter-needle" id="meter-needle" title="Current Evidentiary Balance"></div>
+        </div>
+
+        <div class="meter-explainer-pill" id="meter-explainer-text">
+          <span>⚖ AI Probative Weight:</span> Presumption of Innocence Neutral Baseline (50% - 50%). Submissions shift balance.
+        </div>
+      </div>
+
+      <!-- Courtroom 3-Column Arena -->
+      <div class="courtroom-arena">
+        
+        <!-- LEFT WING: Prosecution / Complainant -->
+        <aside class="court-wing prosecution-wing">
+          <div class="wing-header">
+            <div class="advocate-badge">
+              <div class="advocate-avatar">P</div>
+              <div class="advocate-info">
+                <h4>Advocate for Complainant</h4>
+                <p>Standing State Prosecutor</p>
+              </div>
+            </div>
+            <span style="font-size: 0.75rem; color: var(--crimson-prosecution); font-weight: 700; text-transform: uppercase;">Bar Council #7821</span>
+          </div>
+
+          <!-- Prosecution Oral Submission Box -->
+          <div class="court-action-box">
+            <div class="action-box-title">
+              <span>Oral Pleading / Statement</span>
+              <span style="font-size: 0.7rem; color: var(--text-dim);">Live Docket</span>
+            </div>
+            <textarea class="wing-textarea" id="pros-statement-text" placeholder="Type oral argument regarding statutory liability, bad faith, or bank dishonour..."></textarea>
+            <button class="btn-wing-action" id="btn-pros-statement">Submit Oral Argument</button>
+          </div>
+
+          <!-- Prosecution Evidence Upload Vault -->
+          <div class="court-action-box">
+            <div class="action-box-title">
+              <span>Documentary Evidence Vault</span>
+              <span style="font-size: 0.7rem; color: var(--cyan-primary);">Certified Exhibits</span>
+            </div>
+            <input type="file" id="file-pros-evidence" style="display: none;" />
+            <button class="btn-secondary" id="btn-pros-upload-evidence" style="width: 100%; margin-bottom: 0.5rem; font-size: 0.85rem; padding: 9px;">
+              📁 Upload Evidence (PDF, Image, Docs)
+            </button>
+            <div id="pros-exhibits-container">
+              <div class="file-chip" style="margin-top: 4px;">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path></svg>
+                <span>Exhibit P-1: Bank Dishonour Notice</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Prosecution Witness / Victim Deposition Desk with Live Audio Recording -->
+          <div class="witness-box">
+            <div class="action-box-title">
+              <span>Witness Deposition Box</span>
+              <span style="font-size: 0.7rem; color: #fca5a5;">Under Oath</span>
+            </div>
+            <input type="text" class="form-input" id="pros-witness-name" value="Vikramaditya Singhania (Complainant)" style="padding: 7px 10px; font-size: 0.84rem; margin-bottom: 0.4rem;" />
+            
+            <div class="witness-recorder-row">
+              <button class="btn-mic-record" id="btn-pros-record-witness">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="6"></circle></svg>
+                <span>Record Voice Deposition</span>
+              </button>
+              <input type="file" id="file-pros-witness-audio" accept="audio/*" style="display: none;" />
+              <button type="button" class="btn-secondary" style="padding: 6px 10px; font-size: 0.78rem;" onclick="document.getElementById('file-pros-witness-audio').click()">
+                Upload MP3
+              </button>
+            </div>
+
+            <audio id="audio-pros-witness-preview" class="audio-preview-player" controls style="display: none;"></audio>
+            <textarea class="wing-textarea" id="pros-witness-statement" placeholder="Witness sworn testimony transcript... (or speak into mic above)"></textarea>
+            <button class="btn-wing-action" id="btn-pros-submit-witness">Tender Deposition into Evidence</button>
+          </div>
+
+          <!-- Next Hearing Scheduler -->
+          <div class="hearing-date-info">
+            <span>Scheduled Bench Session:</span>
+            <span style="color: var(--text-main); font-weight: 600;">14 Oct 2026, 10:30 AM</span>
+          </div>
+        </aside>
+
+        <!-- CENTER: Elevated AI Judge Bench -->
+        <main class="center-court-bench">
+          <div class="judge-dais-top">
+            <div class="judge-holographic-avatar">
+              <div class="judge-pulse-ring"></div>
+              <div class="judge-avatar-core">
+                <img src="lexora_logo.png" alt="Lexora Supreme Court Seal" class="judge-logo-img" />
+              </div>
+            </div>
+
+            <div class="judge-title-heading">HIGH JUDICIAL TRIBUNAL OF LEXORA</div>
+            <div class="judge-tier-tag" id="judge-coram-badge">Tier 1 • AI Autonomous Docket</div>
+          </div>
+
+          <!-- Judicial Controls (Gavel, Order in Court) -->
+          <div class="judge-action-controls">
+            <button class="gavel-button" id="btn-manual-gavel" title="Strike Judicial Gavel">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="6" width="20" height="8" rx="2"></rect>
+                <path d="M12 14v7"></path>
+              </svg>
+              <span>Strike Gavel</span>
+            </button>
+          </div>
+
+          <!-- Live Judicial Stenographer Stream -->
+          <div class="stenographer-box">
+            <div class="steno-header">
+              <span>LIVE COURT STENOGRAPHER LOG (OFFICIAL RECORD)</span>
+              <span>AUTO-VERIFIED</span>
+            </div>
+            <div class="steno-scroll-area" id="steno-scroll-box">
+              <!-- Dynamically populated entries -->
+            </div>
+          </div>
+
+          <!-- Final Adjudication Pronouncement CTA -->
+          <button class="btn-pronounce-verdict" id="btn-trigger-verdict">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+            <span>Pronounce Final Judicial Verdict</span>
+          </button>
+        </main>
+
+        <!-- RIGHT WING: Defense / Accused -->
+        <aside class="court-wing defense-wing">
+          <div class="wing-header">
+            <div class="advocate-badge">
+              <div class="advocate-avatar">D</div>
+              <div class="advocate-info">
+                <h4>Counsel for Defense</h4>
+                <p>Lead Defense Attorney</p>
+              </div>
+            </div>
+            <span style="font-size: 0.75rem; color: var(--emerald-defense); font-weight: 700; text-transform: uppercase;">Bar Council #4910</span>
+          </div>
+
+          <!-- Defense Oral Statement Box -->
+          <div class="court-action-box">
+            <div class="action-box-title">
+              <span>Oral Rebuttal / Plea</span>
+              <span style="font-size: 0.7rem; color: var(--text-dim);">Live Docket</span>
+            </div>
+            <textarea class="wing-textarea" id="def-statement-text" placeholder="Type defense cross-arguments, absence of criminal intent, or contractual counter-claims..."></textarea>
+            <button class="btn-wing-action" id="btn-def-statement">Submit Defense Rebuttal</button>
+          </div>
+
+          <!-- Defense Evidence Upload Vault -->
+          <div class="court-action-box">
+            <div class="action-box-title">
+              <span>Defense Exoneration Vault</span>
+              <span style="font-size: 0.7rem; color: var(--emerald-defense);">Counter Exhibits</span>
+            </div>
+            <input type="file" id="file-def-evidence" style="display: none;" />
+            <button class="btn-secondary" id="btn-def-upload-evidence" style="width: 100%; margin-bottom: 0.5rem; font-size: 0.85rem; padding: 9px;">
+              📁 Upload Defense Proof (PDF, Receipts)
+            </button>
+            <div id="def-exhibits-container">
+              <div class="file-chip" style="margin-top: 4px; border-color: rgba(16,185,129,0.3); color: var(--emerald-defense);">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path></svg>
+                <span>Exhibit D-1: Formal Stop-Payment Order</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Defense Witness Box with Live Audio Recording -->
+          <div class="witness-box">
+            <div class="action-box-title">
+              <span>Defense Witness Box</span>
+              <span style="font-size: 0.7rem; color: #a7f3d0;">Under Oath</span>
+            </div>
+            <input type="text" class="form-input" id="def-witness-name" value="Rohan Mehra (Accused / Entity Rep)" style="padding: 7px 10px; font-size: 0.84rem; margin-bottom: 0.4rem;" />
+            
+            <div class="witness-recorder-row">
+              <button class="btn-mic-record" id="btn-def-record-witness">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="6"></circle></svg>
+                <span>Record Voice Deposition</span>
+              </button>
+              <input type="file" id="file-def-witness-audio" accept="audio/*" style="display: none;" />
+              <button type="button" class="btn-secondary" style="padding: 6px 10px; font-size: 0.78rem;" onclick="document.getElementById('file-def-witness-audio').click()">
+                Upload MP3
+              </button>
+            </div>
+
+            <audio id="audio-def-witness-preview" class="audio-preview-player" controls style="display: none;"></audio>
+            <textarea class="wing-textarea" id="def-witness-statement" placeholder="Witness testimony under solemn oath..."></textarea>
+            <button class="btn-wing-action" id="btn-def-submit-witness">Tender Defense Testimony</button>
+          </div>
+
+          <!-- Defense Hearing Date -->
+          <div class="hearing-date-info">
+            <span>Scheduled Bench Session:</span>
+            <span style="color: var(--text-main); font-weight: 600;">14 Oct 2026, 10:30 AM</span>
+          </div>
+        </aside>
+
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         FINAL VERDICT CEREMONIAL MODAL (ON 95% THRESHOLD OR TRIGGER)
+         =================================================================== -->
+    <div class="verdict-modal-overlay" id="verdict-modal">
+      <div class="verdict-decree-card">
+        <div class="decree-header">
+          <img src="lexora_logo.png" alt="Lexora Supreme Court of Justice" class="decree-crest-logo" />
+          <h2 class="decree-court-title" id="decree-court-title">IN THE HIGH JUDICIAL TRIBUNAL OF LEXORA</h2>
+          <div class="decree-case-no" id="decree-case-no">FIR/2026/DL-SZ/10492 • Singhania vs Apex Ventures</div>
+        </div>
+
+        <div class="decree-verdict-banner" id="decree-outcome-banner">
+          <div class="verdict-big-outcome" id="decree-outcome-text">GUILTY AS CHARGED</div>
+          <p style="font-size: 0.9rem;">Final Judicial Decree Executed Under Algorithmic Due Process</p>
+        </div>
+
+        <div class="decree-section-title">Ratio Decidendi & Legal Findings</div>
+        <p class="decree-body-text" id="decree-ratio-text">
+          Evaluating the evidentiary balance settled upon the record, the Prosecution has established 
+          statutory elements beyond reasonable doubt.
+        </p>
+
+        <div class="decree-section-title">Conclusive Findings of Fact</div>
+        <ul class="decree-findings-list" id="decree-findings-list">
+          <li>Finding 1: Cryptographic payment trail corroborates consideration receipt.</li>
+          <li>Finding 2: Dishonoured instrument proves non-existent account status.</li>
+        </ul>
+
+        <div class="decree-section-title">Sentencing, Restitution & Orders</div>
+        <p class="decree-body-text" id="decree-orders-text">
+          The Accused is ordered to pay full restitution with statutory penalties.
+        </p>
+
+        <div class="decree-footer-signature">
+          <div class="seal-stamp-box">
+            <img src="lexora_logo.png" alt="Official Judicial Seal" style="width: 58px; height: 58px; object-fit: contain; filter: drop-shadow(0 0 10px var(--gold-glow));" />
+            <div>
+              <div style="font-family: var(--font-sans); font-weight: 700; color: #fff;">Lexora Supreme Algorithmic Bench</div>
+              <div class="seal-hash" id="decree-seal-hash">Cryptographic Seal: LEX-VERDICT-994A-SHA256</div>
+            </div>
+          </div>
+
+          <div class="decree-actions-row">
+            <button class="btn-secondary" id="btn-print-decree">Export / Print Decree</button>
+            <button class="btn-primary" id="btn-restart-app">File New Case</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Audio Synthesizer & Application Logic -->
+  <script src="court-audio.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
