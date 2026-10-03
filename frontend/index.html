@@ -39,9 +39,15 @@
         </div>
 
         <div class="header-controls">
+          <!-- Voice & Multilingual Controls (Issue 5: Hindi / English + Sarvam AI) -->
+          <div class="voice-lang-group" title="Select Voice Language">
+            <button type="button" class="lang-pill active" id="btn-lang-en" onclick="setAppVoiceLanguage('en')">EN English</button>
+            <button type="button" class="lang-pill" id="btn-lang-hi" onclick="setAppVoiceLanguage('hi')">HI हिन्दी</button>
+          </div>
+
           <div class="brand-badge">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"></circle></svg>
-            <span>LIVE AI REASONING</span>
+            <span id="ai-engine-badge">LIVE AI REASONING</span>
           </div>
           <button class="icon-btn active" id="btn-sound-toggle" title="Court Sound Effects Active">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -78,7 +84,7 @@
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <polygon points="5 3 19 12 5 21 5 3"></polygon>
         </svg>
-        <span>Press Any Key or Click Anywhere to Enter</span>
+        <span>Enter Court Portal (Press Enter or Click Here)</span>
       </div>
     </main>
 
@@ -242,7 +248,7 @@
             <div class="analysis-meta-chips">
               <div class="meta-chip" id="chip-domain"><strong>Domain:</strong> Commercial</div>
               <div class="meta-chip" id="chip-severity"><strong>Severity:</strong> Medium</div>
-              <div class="meta-chip" id="chip-time"><strong>Est. Timeline:</strong> 48 Hours</div>
+              <div class="meta-chip" id="chip-time"><strong>Est. Timeline:</strong> AI Computing...</div>
             </div>
           </div>
         </div>
@@ -320,7 +326,7 @@
             <div class="choice-card selected" id="choice-card-ai">
               <div class="choice-card-title">
                 <span>Appoint AI Judge (Fast-Track Digital Court)</span>
-                <span style="color: var(--cyan-primary);">⚡ 48-Hour Resolution</span>
+                <span id="choice-card-ai-badge" style="color: var(--cyan-primary);">⚡ Expedited Digital Resolution</span>
               </div>
               <p class="choice-card-desc">
                 Convene the automated Court of Lexora immediately. Zero courtroom backlogs, continuous mathematical 
@@ -369,7 +375,7 @@
         <div class="meter-header-row">
           <div class="meter-party-label label-prosecution">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-            <span>PROSECUTION (COMPLAINANT)</span>
+            <span id="meter-pros-title">PROSECUTION (COMPLAINANT)</span>
             <span class="meter-ratio-display" id="meter-pros-val">50%</span>
           </div>
 
@@ -380,7 +386,7 @@
 
           <div class="meter-party-label label-defense">
             <span class="meter-ratio-display" id="meter-def-val">50%</span>
-            <span>DEFENSE (ACCUSED)</span>
+            <span id="meter-def-title">DEFENSE (ACCUSED)</span>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s-8-4-8-10V5l8-3 8 3v7c0 6-8 10-8 10z"></path></svg>
           </div>
         </div>
@@ -407,8 +413,8 @@
             <div class="advocate-badge">
               <div class="advocate-avatar">P</div>
               <div class="advocate-info">
-                <h4>Advocate for Complainant</h4>
-                <p>Standing State Prosecutor</p>
+                <h4 id="pros-advocate-title">Advocate for Complainant</h4>
+                <p id="pros-party-name">Complainant: Vikramaditya Singhania</p>
               </div>
             </div>
             <span style="font-size: 0.75rem; color: var(--crimson-prosecution); font-weight: 700; text-transform: uppercase;">Bar Council #7821</span>
@@ -522,8 +528,8 @@
             <div class="advocate-badge">
               <div class="advocate-avatar">D</div>
               <div class="advocate-info">
-                <h4>Counsel for Defense</h4>
-                <p>Lead Defense Attorney</p>
+                <h4 id="def-advocate-title">Counsel for Defense</h4>
+                <p id="def-party-name">Accused: Rohan Mehra</p>
               </div>
             </div>
             <span style="font-size: 0.75rem; color: var(--emerald-defense); font-weight: 700; text-transform: uppercase;">Bar Council #4910</span>
@@ -592,54 +598,208 @@
     </section>
 
     <!-- ===================================================================
-         FINAL VERDICT CEREMONIAL MODAL (ON 95% THRESHOLD OR TRIGGER)
+         FINAL VERDICT CEREMONIAL MODAL & OFFICIAL JUDICIAL REPORT DECREE
          =================================================================== -->
     <div class="verdict-modal-overlay" id="verdict-modal">
-      <div class="verdict-decree-card">
-        <div class="decree-header">
-          <img src="lexora_logo.png" alt="Lexora Supreme Court of Justice" class="decree-crest-logo" />
-          <h2 class="decree-court-title" id="decree-court-title">IN THE HIGH JUDICIAL TRIBUNAL OF LEXORA</h2>
-          <div class="decree-case-no" id="decree-case-no">FIR/2026/DL-SZ/10492 • Singhania vs Apex Ventures</div>
+      <div class="verdict-report-wrapper">
+        
+        <!-- Top Toolbar with Actions -->
+        <div class="decree-toolbar-bar">
+          <div class="decree-toolbar-left">
+            <span class="report-status-dot"></span>
+            <span style="font-weight: 700; letter-spacing: 0.05em;">CERTIFIED JUDICIAL DECREE & TRIAL REPORT</span>
+            <span class="badge-official-paper">OFFICIAL WHITE DOCUMENT FORMAT</span>
+          </div>
+          <div class="decree-toolbar-right">
+            <button class="btn-decree-action" id="btn-print-decree" title="Print Complete Multi-Page Document without clipping">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+              <span>Print Complete Documentation (PDF)</span>
+            </button>
+            <button class="btn-decree-action secondary" id="btn-download-decree" title="Download Document File">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+              <span>Download (.doc)</span>
+            </button>
+            <button class="btn-decree-action restart" id="btn-restart-app">
+              <span>Close / New Case</span>
+            </button>
+          </div>
         </div>
 
-        <div class="decree-verdict-banner" id="decree-outcome-banner">
-          <div class="verdict-big-outcome" id="decree-outcome-text">GUILTY AS CHARGED</div>
-          <p style="font-size: 0.9rem;">Final Judicial Decree Executed Under Algorithmic Due Process</p>
-        </div>
-
-        <div class="decree-section-title">Ratio Decidendi & Legal Findings</div>
-        <p class="decree-body-text" id="decree-ratio-text">
-          Evaluating the evidentiary balance settled upon the record, the Prosecution has established 
-          statutory elements beyond reasonable doubt.
-        </p>
-
-        <div class="decree-section-title">Conclusive Findings of Fact</div>
-        <ul class="decree-findings-list" id="decree-findings-list">
-          <li>Finding 1: Cryptographic payment trail corroborates consideration receipt.</li>
-          <li>Finding 2: Dishonoured instrument proves non-existent account status.</li>
-        </ul>
-
-        <div class="decree-section-title">Sentencing, Restitution & Orders</div>
-        <p class="decree-body-text" id="decree-orders-text">
-          The Accused is ordered to pay full restitution with statutory penalties.
-        </p>
-
-        <div class="decree-footer-signature">
-          <div class="seal-stamp-box">
-            <img src="lexora_logo.png" alt="Official Judicial Seal" style="width: 58px; height: 58px; object-fit: contain; filter: drop-shadow(0 0 10px var(--gold-glow));" />
-            <div>
-              <div style="font-family: var(--font-sans); font-weight: 700; color: #fff;">Lexora Supreme Algorithmic Bench</div>
-              <div class="seal-hash" id="decree-seal-hash">Cryptographic Seal: LEX-VERDICT-994A-SHA256</div>
+        <!-- The Authentic Legal White Paper Document -->
+        <article class="legal-document-paper" id="decree-document-paper">
+          
+          <!-- Official Court Header -->
+          <header class="legal-court-header">
+            <div class="legal-court-crest">
+              <img src="lexora_logo.png" alt="Official High Court Emblem" class="crest-img" />
             </div>
-          </div>
+            <h1 class="legal-court-title" id="decree-court-title">IN THE HIGH JUDICIAL TRIBUNAL OF LEXORA</h1>
+            <h2 class="legal-court-subtitle" id="decree-court-subtitle">SPECIAL COMMERCIAL, ECONOMIC & SESSIONS DOCKET</h2>
+            <div class="legal-court-jurisdiction">STATE JURISDICTION OF NATIONAL CAPITAL • EXTRAORDINARY DIGITAL SESSIONS</div>
 
-          <div class="decree-actions-row">
-            <button class="btn-secondary" id="btn-print-decree">Export / Print Decree</button>
-            <button class="btn-primary" id="btn-restart-app">File New Case</button>
-          </div>
-        </div>
+            <!-- Docket Registry Particulars -->
+            <div class="legal-registry-bar">
+              <div class="reg-item"><strong>CNR NUMBER:</strong> <span id="decree-cnr-no">DL-HC-LEX-2026-0010492</span></div>
+              <div class="reg-item"><strong>CASE NUMBER:</strong> <span id="decree-case-reg-no">CRIMINAL CASE NO. CC/10492/2026</span></div>
+              <div class="reg-item"><strong>POLICE STATION:</strong> <span id="decree-station-text">Cyber & Economic Offenses, New Delhi</span></div>
+              <div class="reg-item"><strong>FIR NUMBER:</strong> <span id="decree-fir-no">FIR/2026/DL-SZ/10492</span></div>
+              <div class="reg-item"><strong>DATE OF INSTITUTION:</strong> <span id="decree-inst-date">12th September 2026</span></div>
+              <div class="reg-item"><strong>DATE OF FINAL JUDGMENT:</strong> <span id="decree-order-date">14th October 2026</span></div>
+            </div>
+          </header>
+
+          <hr class="legal-rule" />
+
+          <!-- Cause Title & Memo of Parties -->
+          <section class="legal-parties-section">
+            <div class="party-block">
+              <div class="party-label">COMPLAINANT / PROSECUTING STATE:</div>
+              <div class="party-title-name" id="decree-complainant-name">Vikramaditya Singhania</div>
+              <div class="party-counsel-rep" id="decree-pros-counsel">Represented by: Standing State Prosecutor / Bar ID #7821</div>
+            </div>
+
+            <div class="party-versus-divider">...VERSUS...</div>
+
+            <div class="party-block">
+              <div class="party-label">ACCUSED / RESPONDENT:</div>
+              <div class="party-title-name" id="decree-accused-name">Rohan Mehra / Apex Global Ventures Pvt Ltd</div>
+              <div class="party-counsel-rep" id="decree-def-counsel">Represented by: Lead Defense Counsel / Bar ID #4910</div>
+            </div>
+          </section>
+
+          <hr class="legal-rule-subtle" />
+
+          <!-- Section 1: Charges & Enactments -->
+          <section class="legal-doc-section">
+            <h3 class="legal-sec-heading">1. STATUTORY CHARGES & NATURE OF COMPLAINT</h3>
+            <p class="legal-doc-p" id="decree-statutes-text">
+              Charges examined under: Section 318(4) Bharatiya Nyaya Sanhita (Cheating & Dishonest Inducement), Section 66D Information Technology Act 2000, and Section 138 Negotiable Instruments Act 1881.
+            </p>
+            <p class="legal-doc-p" id="decree-complaint-summary">
+              The instant complaint alleges fraudulent inducement of capital, issuance of bad instruments, and intentional deceit resulting in severe economic wrongful loss.
+            </p>
+          </section>
+
+          <!-- Section 2: Items & Exhibits Submitted During Trial -->
+          <section class="legal-doc-section">
+            <h3 class="legal-sec-heading">2. SCHEDULE OF ADMITTED EXHIBITS (ITEMS SUBMITTED DURING COURT)</h3>
+            <p class="legal-doc-sub">The following forensic, documentary, and electronic exhibits were formally admitted into the substantive judicial record during proceedings:</p>
+            
+            <div class="legal-exhibits-dual-grid">
+              <div class="exhibit-sub-card">
+                <div class="exhibit-card-title prosecution">Prosecution Exhibits (P-Series)</div>
+                <ul class="legal-doc-list" id="decree-exhibits-pros-list">
+                  <li><strong>Exhibit P-1:</strong> Certified Bank Dishonour Memo & Statutory Notice</li>
+                  <li><strong>Exhibit P-2:</strong> Cryptographic RTGS Transaction Receipt & Gateway Audit Log</li>
+                </ul>
+              </div>
+
+              <div class="exhibit-sub-card">
+                <div class="exhibit-card-title defense">Defense Exhibits (D-Series)</div>
+                <ul class="legal-doc-list" id="decree-exhibits-def-list">
+                  <li><strong>Exhibit D-1:</strong> Formal Counter-Reply & Commercial Communications Audit Log</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <!-- Section 3: Witness Depositions on Stand -->
+          <section class="legal-doc-section">
+            <h3 class="legal-sec-heading">3. RECORD OF WITNESS DEPOSITIONS (SWORN TESTIMONIES UNDER OATH)</h3>
+            <div class="legal-witnesses-container" id="decree-witness-depositions-list">
+              <!-- Dynamically populated -->
+            </div>
+          </section>
+
+          <!-- Section 4: Points / Issues for Determination -->
+          <section class="legal-doc-section">
+            <h3 class="legal-sec-heading">4. ISSUES FRAMED FOR JUDICIAL DETERMINATION</h3>
+            <ol class="legal-doc-ol" id="decree-issues-list">
+              <li>Whether the documentary exhibits establish prima facie statutory ingredients beyond reasonable doubt?</li>
+              <li>Whether the statutory presumption of mens rea and liability stands unrebutted by the defense?</li>
+              <li>What penal sentences, restitutions, or remedies are legally warranted in the premises?</li>
+            </ol>
+          </section>
+
+          <!-- Section 5: The Complete Thinking of the AI Behind Taking Decisions (Ratio Decidendi) -->
+          <section class="legal-doc-section">
+            <h3 class="legal-sec-heading">5. JUDICIAL EVALUATION & RATIO DECIDENDI (AI REASONING OF THE BENCH)</h3>
+            <div class="legal-ratio-content" id="decree-detailed-ratio">
+              <!-- Exhaustive AI deliberation paragraphs -->
+            </div>
+          </section>
+
+          <!-- Section 6: Conclusive Findings of Fact -->
+          <section class="legal-doc-section">
+            <h3 class="legal-sec-heading">6. CONCLUSIVE FINDINGS OF FACT</h3>
+            <ul class="legal-doc-list" id="decree-findings-fact-list">
+              <li>Finding 1: Cryptographic bank memos establish undisputed consideration transfer.</li>
+              <li>Finding 2: The defense has failed to tender sufficient rebuttal to displace statutory presumption.</li>
+            </ul>
+          </section>
+
+          <!-- Section 7: Final Judicial Order & Decree -->
+          <section class="legal-doc-section legal-decree-box">
+            <h3 class="legal-sec-heading">7. OPERATIVE JUDGMENT & PENAL / RESTITUTION DECREE</h3>
+            <div class="legal-decree-stamp-row">
+              <div class="legal-verdict-stamp" id="decree-verdict-stamp">GUILTY AS CHARGED</div>
+              <div class="legal-balance-ratio" id="decree-balance-ratio">Evidentiary Equilibrium: Pros 91.0% | Def 9.0%</div>
+            </div>
+            <div class="legal-orders-body" id="decree-final-orders-text">
+              The Accused is hereby convicted and directed to fulfill complete statutory restitution within thirty (30) days from this date.
+            </div>
+            <div class="legal-appeal-body" id="decree-appeal-text">
+              Statutory right of appellate review stands reserved for thirty (30) days before the High Appellate Court of Judicature.
+            </div>
+          </section>
+
+          <!-- Section 8: Formal Attestation & Quadruple Signature Blocks -->
+          <footer class="legal-signature-section">
+            <div class="legal-sig-row">
+              <div class="legal-sig-block">
+                <div class="sig-line"></div>
+                <div class="sig-name" id="sig-presiding-officer">Hon'ble Presiding Judge</div>
+                <div class="sig-desc">High Judicial Tribunal of Lexora</div>
+                <div class="sig-hash-code" id="sig-seal-hash">Cryptographic Seal: LEX-VERDICT-994A-SHA256</div>
+              </div>
+
+              <div class="legal-sig-block">
+                <div class="sig-line"></div>
+                <div class="sig-name" id="sig-pros-counsel">Standing State Prosecutor</div>
+                <div class="sig-desc">Counsel for Complainant</div>
+                <div class="sig-sub-text">Bar Council Enrolment #7821</div>
+              </div>
+            </div>
+
+            <div class="legal-sig-row" style="margin-top: 2.2rem;">
+              <div class="legal-sig-block">
+                <div class="sig-line"></div>
+                <div class="sig-name" id="sig-def-counsel">Lead Defense Attorney</div>
+                <div class="sig-desc">Counsel for Accused</div>
+                <div class="sig-sub-text">Bar Council Enrolment #4910</div>
+              </div>
+
+              <div class="legal-sig-block countersign-block">
+                <div class="official-ink-stamp">
+                  <div class="stamp-circular-ring">
+                    <span>COURT OF LEXORA</span>
+                    <span>★ JUDICIAL REGISTRY ★</span>
+                    <span>AUTHENTICATED</span>
+                  </div>
+                </div>
+                <div class="sig-line" style="margin-top: 8px;"></div>
+                <div class="sig-name">Authorized Judicial Officer / Registrar</div>
+                <div class="sig-desc">Attestation & Verification Countersign</div>
+                <div class="sig-sub-text">Date: 14 Oct 2026 • Station: New Delhi</div>
+              </div>
+            </div>
+          </footer>
+
+        </article>
       </div>
     </div>
+
+
 
   </div>
 
